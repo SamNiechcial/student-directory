@@ -34,12 +34,20 @@ def print(students)
   # end
 # Method below is for 8.3:
 # (Calling .length on a string returns the number of characters in that string as an integer)
- students.each do |student|
-   if student[:name].length < 12
-     puts "#{student[:name]} (#{student[:cohort]} cohort)"
-   end
- end
+  # students.each do |student|
+  # if student[:name].length < 12
+  #   puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  # end
+  #end
+# Method below is for 8.4:
+# ()
+  counter = 0
+  until counter == students.count do
+    puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+    counter += 1
+  end
 end
+
 
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
