@@ -21,8 +21,16 @@ def print_header
   puts "-------------"
 end
 def print(students)
-  students.each.with_index(1) do |student, index|
-    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort)"
+# Method below is for 8.1:
+  #  students.each.with_index(1) do |student, index|
+  #    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort)"
+  #  end
+# Method below is for 8.2:
+# (Calling .chr on a string returns the first charcter as another string)
+  students.each do |student|
+    if student[:name].chr == "S"
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 def print_footer(students)
