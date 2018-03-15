@@ -2,12 +2,14 @@ def input_students
 
   students = []
   puts "Please enter the student details"
-  puts "To finish, just hit return for every entry"
 
   puts "What is the name of the student?"
   name = gets.chomp
   puts "Which cohort is the student in?"
   cohort = gets.chomp
+  if cohort = nil
+    cohort = "March"
+  end
   puts "Where was the student born?"
   country = gets.chomp
   puts "What is the student's height?"
@@ -15,15 +17,32 @@ def input_students
   puts "What are the student's hobbies?"
   hobbies = gets.chomp
 
-  while !name.empty? do
+  while true do
 
     students << {name: name, cohort: cohort, country: country, height: height, hobbies: hobbies}
+
     puts "Now we have #{students.count} students"
+
+    puts "Did you make any errors with your last entry?"
+    error = gets.chomp
+    if error == "Yes"
+      students.pop
+      puts "Please re-enter the student data"
+    else
+      true
+    end
+
+    puts "Do you wish to stop? Enter 'Yes' to stop or 'No' to enter another student's details:"
+    stop = gets.chomp
+    stop == "Yes" ? break : true
 
     puts "What is the name of the student?"
     name = gets.chomp
     puts "Which cohort is the student in?"
     cohort = gets.chomp
+    if cohort = nil
+      cohort = "March"
+    end
     puts "Where was the student born?"
     country = gets.chomp
     puts "What is the student's height?"
