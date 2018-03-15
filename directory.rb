@@ -7,7 +7,7 @@ def input_students
   name = gets.chomp
   puts "Which cohort is the student in?"
   cohort = gets.chomp
-  if cohort = nil
+  if cohort == nil
     cohort = "March"
   end
   puts "Where was the student born?"
@@ -40,7 +40,7 @@ def input_students
     name = gets.chomp
     puts "Which cohort is the student in?"
     cohort = gets.chomp
-    if cohort = nil
+    if cohort == nil
       cohort = "March"
     end
     puts "Where was the student born?"
@@ -97,11 +97,17 @@ def print(students)
 # Method below is for 8.5:
 # (Loop from 8.1 modified to include extra student data)
 
-students.each.with_index(1) do |student, index|
-    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
+#  students.each.with_index(1) do |student, index|
+#    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
+#  end
+#end
+
+# Method below is for 8.8 & is currently broke - returning directory.rb:108:in ""`[]': no implicit conversion of Symbol into Integer (TypeError)"" on running - will try and fix later
+  sorted = students.sort_by! { |student_sort| student_sort[:cohort]}
+  sorted.each do |student|
+   puts "#{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
   end
 end
-
 
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
