@@ -1,30 +1,55 @@
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
-  # create an empty array
+
   students = []
-  # get the first name
+  puts "Please enter the student details"
+  puts "To finish, just hit return for every entry"
+
+  puts "What is the name of the student?"
   name = gets.chomp
-  # while the name is not empty, repeat this code
+  puts "Which cohort is the student in?"
+  cohort = gets.chomp
+  puts "Where was the student born?"
+  country = gets.chomp
+  puts "What is the student's height?"
+  height = gets.chomp
+  puts "What are the student's hobbies?"
+  hobbies = gets.chomp
+
   while !name.empty? do
-    # add the student has to the array
-    students << {name: name, cohort: :november}
+
+    students << {name: name, cohort: cohort, country: country, height: height, hobbies: hobbies}
     puts "Now we have #{students.count} students"
-    # get another name from the user
+
+    puts "What is the name of the student?"
     name = gets.chomp
+    puts "Which cohort is the student in?"
+    cohort = gets.chomp
+    puts "Where was the student born?"
+    country = gets.chomp
+    puts "What is the student's height?"
+    height = gets.chomp
+    puts "What are the student's hobbies?"
+    hobbies = gets.chomp
+
   end
-  # return the array of students
+
+  # below line returns the array of students as output of the input_students method
+
   students
 end
+
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
+
 def print(students)
+
 # Method below is for 8.1:
   #  students.each.with_index(1) do |student, index|
   #    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort)"
   #  end
+
 # Method below is for 8.2:
 # (Calling .chr on a string returns the first charcter as another string)
   # students.each do |student|
@@ -32,6 +57,7 @@ def print(students)
   #    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   #  end
   # end
+
 # Method below is for 8.3:
 # (Calling .length on a string returns the number of characters in that string as an integer)
   # students.each do |student|
@@ -39,12 +65,21 @@ def print(students)
   #   puts "#{student[:name]} (#{student[:cohort]} cohort)"
   # end
   #end
+
 # Method below is for 8.4:
-# ()
-  counter = 0
-  until counter == students.count do
-    puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
-    counter += 1
+# (When referencing from a subhash inside an array, can just put the array indices square brackets next to the hash key square brackets)
+# ( I.e. puts "#{array_name[array_index][hash_key]}" )
+#  counter = 0
+#  until counter == students.count do
+#    puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+#    counter += 1
+#  end
+
+# Method below is for 8.5:
+# (Loop from 8.1 modified to include extra student data)
+
+students.each.with_index(1) do |student, index|
+    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})"
   end
 end
 
@@ -52,11 +87,14 @@ end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
+
 # nothing happens until we call the methods
+
 students = input_students
 print_header
 print(students)
 print_footer(students)
+
 # it's important that print() doesn't add new line characters
 # New lines can be added manually to print commands like so:
 # print "line1\nline2\nline3"
