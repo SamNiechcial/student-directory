@@ -79,7 +79,7 @@ def print(students)
 # (Loop from 8.1 modified to include extra student data)
 
 students.each.with_index(1) do |student, index|
-    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})"
+    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
   end
 end
 
