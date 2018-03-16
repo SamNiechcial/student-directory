@@ -3,56 +3,47 @@ def input_students
   students = []
   puts "Please enter the student details"
 
-  puts "What is the name of the student?"
-# Exercise 10 -> Chop is an alternative method to call on str with a similar output
-# .chomp is safer as it doesn't change the string if it doesn't end in a record separator
-  name = gets.chop
-  puts "Which cohort is the student in?"
-  cohort = gets.chop
-  if cohort == nil
-    cohort = "March"
-  end
-  puts "Where was the student born?"
-  country = gets.chop
-  puts "What is the student's height?"
-  height = gets.chop
-  puts "What are the student's hobbies?"
-  hobbies = gets.chop
-
   while true do
 
-    students << {name: name, cohort: cohort, country: country, height: height, hobbies: hobbies}
-
-    puts "Now we have #{students.count} students"
-
-    puts "Did you make any errors with your last entry?"
-    error = gets.chomp
-    if error == "Yes"
-      students.pop
-      puts "Please re-enter the student data"
-    else
-      true
-    end
-
-    puts "Do you wish to stop? Enter 'Yes' to stop or 'No' to enter another student's details:"
+    puts "Do you wish to stop? Enter 'Yes' to stop or anything else to enter another student's details:"
     stop = gets.chomp
-    stop == "Yes" ? break : true
+    if stop == "Yes" && students.length == 0
+      puts "Student List not printed as no students have been entered"
+      exit
+    elsif stop == "Yes" && students.length != 0
+      break
+    end
 
     puts "What is the name of the student?"
-    name = gets.chomp
+# Exercise 10 -> Chop is an alternative method to call on str with a similar output
+# .chomp is safer as it doesn't change the string if it doesn't end in a record separator
+    name = gets.chop
     puts "Which cohort is the student in?"
     cohort = gets.chomp
-    if cohort == nil
+    puts "Where was the student born?"
+    if cohort == ""
       cohort = "March"
     end
-    puts "Where was the student born?"
     country = gets.chomp
     puts "What is the student's height?"
     height = gets.chomp
     puts "What are the student's hobbies?"
     hobbies = gets.chomp
 
-  end
+    students << {name: name, cohort: cohort, country: country, height: height, hobbies: hobbies}
+
+    puts "Now we have #{students.count} students"
+
+    puts "Did you make any errors with your last entry? Enter 'Yes' if so, or anything else if not:"
+    error = gets.chomp
+    if error == "Yes"
+      discard = students.pop
+      puts "Please re-enter the student data"
+    else
+      true
+    end
+
+end
 
   # below line returns the array of students as output of the input_students method
 
@@ -104,10 +95,11 @@ def print(students)
 #  end
 #end
 
-# Method below is for 8.8 & is currently broke - returning directory.rb:108:in ""`[]': no implicit conversion of Symbol into Integer (TypeError)"" on running - will try and fix later
+# Method below is for 8.8:
+# (Calling .sort_by! on an array sorts that array by the value specified)
   sorted = students.sort_by! { |student_sort| student_sort[:cohort]}
   sorted.each do |student|
-   puts "#{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
+    puts "#{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
   end
 end
 
@@ -120,7 +112,6 @@ def print_footer(students)
 end
 
 # nothing happens until we call the methods
-
 students = input_students
 print_header
 print(students)
