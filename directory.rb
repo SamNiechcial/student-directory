@@ -1,6 +1,27 @@
-def input_students
-
+def interactive_menu
   students = []
+  loop do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    selection = gets.chomp
+    case selection
+      when "1"
+        students = input_students(students)
+      when "2"
+        print_header
+        print(students)
+        print_footer(students)
+      when "9"
+        exit
+      else
+        puts "I don't know what you meant, try again"
+      end
+  end
+end
+
+def input_students(students)
+
   puts "Please enter the student details"
 
   while true do
@@ -15,9 +36,7 @@ def input_students
     end
 
     puts "What is the name of the student?"
-# Exercise 10 -> Chop is an alternative method to call on str with a similar output
-# .chomp is safer as it doesn't change the string if it doesn't end in a record separator
-    name = gets.chop
+    name = gets.chomp
     puts "Which cohort is the student in?"
     cohort = gets.chomp
     puts "Where was the student born?"
@@ -39,14 +58,8 @@ def input_students
     if error == "Yes"
       discard = students.pop
       puts "Please re-enter the student data"
-    else
-      true
     end
-
-end
-
-  # below line returns the array of students as output of the input_students method
-
+  end
   students
 end
 
@@ -56,47 +69,6 @@ def print_header
 end
 
 def print(students)
-
-# Method below is for 8.1:
-  #  students.each.with_index(1) do |student, index|
-  #    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort)"
-  #  end
-
-# Method below is for 8.2:
-# (Calling .chr on a string returns the first charcter as another string)
-  # students.each do |student|
-  #  if student[:name].chr == "S"
-  #    puts "#{student[:name]} (#{student[:cohort]} cohort)"
-  #  end
-  # end
-
-# Method below is for 8.3:
-# (Calling .length on a string returns the number of characters in that string as an integer)
-  # students.each do |student|
-  # if student[:name].length < 12
-  #   puts "#{student[:name]} (#{student[:cohort]} cohort)"
-  # end
-  #end
-
-# Method below is for 8.4:
-# (When referencing from a subhash inside an array, can just put the array indices square brackets next to the hash key square brackets)
-# ( I.e. puts "#{array_name[array_index][hash_key]}" )
-#  counter = 0
-#  until counter == students.count do
-#    puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
-#    counter += 1
-#  end
-
-# Method below is for 8.5:
-# (Loop from 8.1 modified to include extra student data)
-
-#  students.each.with_index(1) do |student, index|
-#    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
-#  end
-#end
-
-# Method below is for 8.8:
-# (Calling .sort_by! on an array sorts that array by the value specified)
   sorted = students.sort_by! { |student_sort| student_sort[:cohort]}
   sorted.each do |student|
     puts "#{student[:name]} (#{student[:cohort]} cohort) (born in #{student[:country]}) (height: #{student[:height]}) (Enjoys #{student[:hobbies]})".center(220)
@@ -111,13 +83,4 @@ def print_footer(students)
   end
 end
 
-# nothing happens until we call the methods
-students = input_students
-print_header
-print(students)
-print_footer(students)
-
-# it's important that print() doesn't add new line characters
-# New lines can be added manually to print commands like so:
-# print "line1\nline2\nline3"
-# These \n escape characters need to be in double quotes!
+interactive_menu
