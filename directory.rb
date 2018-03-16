@@ -4,18 +4,20 @@ def input_students
   puts "Please enter the student details"
 
   puts "What is the name of the student?"
-  name = gets.chomp
+# Exercise 10 -> Chop is an alternative method to call on str with a similar output
+# .chomp is safer as it doesn't change the string if it doesn't end in a record separator
+  name = gets.chop
   puts "Which cohort is the student in?"
-  cohort = gets.chomp
+  cohort = gets.chop
   if cohort == nil
     cohort = "March"
   end
   puts "Where was the student born?"
-  country = gets.chomp
+  country = gets.chop
   puts "What is the student's height?"
-  height = gets.chomp
+  height = gets.chop
   puts "What are the student's hobbies?"
-  hobbies = gets.chomp
+  hobbies = gets.chop
 
   while true do
 
